@@ -14,12 +14,11 @@ MarioSantanaAssignment2 <- list(
   email     = "msantan1@ucsc.edu",
   studentID = 1293498
 )
-
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-
 # Question 1
 install.packages("repmis")
 library("repmis")
+Y
 source_data("https://github.com/EconomiCurtis/econ294_2015/raw/master/data/diamonds.RData")
 
 MarioSantanaAssignment2$s1a <- nrow(diamonds)
@@ -28,6 +27,7 @@ MarioSantanaAssignment2$s1c <- names(diamonds)
 MarioSantanaAssignment2$s1d <- summary(diamonds$price)
 
 # Question 2
+library(foreign)
 DATA <- source_data("https://github.com/EconomiCurtis/econ294_2015/raw/master/data/NHIS_2007_TSV.txt", sep = "\t")
 
 MarioSantanaAssignment2$s2a <-  nrow(DATA)
@@ -57,7 +57,6 @@ MarioSantanaAssignment2$s2h <-  summary(DATA$weight[DATA$SEX == 1])
 MarioSantanaAssignment2$s2i <-  summary(DATA$weight[DATA$SEX == 2])
 
 # Question 3
-
 vec <- c(letters,LETTERS)
 paste(vec[c(39,1,18)], collapse="")
 
@@ -71,3 +70,14 @@ paste(arr[1,2,2],arr[1,1,1],arr[3,3,2], sep = "")
 MarioSantanaAssignment2$s3c <-  arr[,1,2]
 MarioSantanaAssignment2$s3d <-  arr[2,2,]
 MarioSantanaAssignment2$s3e <-  paste(arr[1,2,2],arr[1,1,1],arr[3,3,2], sep = "")
+
+# Question 4
+library(foreign)
+ALAN <- read.dta("http://people.ucsc.edu/~aspearot/Econ_217_Data/org_example.dta")
+all <- aggregate(ALAN$rw, list(ALAN$year, ALAN$month, ALAN$educ), FUN=mean, na.rm = TRUE)
+all <- names(all) <- c("Year","Month","Educatio")
+summary(all)
+all
+MarioSantanaAssignment2$s4a <- all
+
+'save(MarioSantanaAssignment2,file = "Desktop/MarioSantanaAssignment2.RData")'
